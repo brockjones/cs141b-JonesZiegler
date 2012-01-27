@@ -77,7 +77,7 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 		/* Iterates through unlocked list checking if keys match */
 		for (int i=0; i<unlockedList.size(); i++){
 			current = unlockedList.get(i);
-			if (current.getKey().equals(documentKey)){
+			if (documentKey.equals(current.getKey())){
 				//newItem = new UnlockedDocument(current.getKey(), current.getTitle(), current.getContents());
 				break;
 			}
@@ -101,7 +101,7 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 
 		/* This loop searches the list of UnlockedDocuments for the key. If the key is found, then we know the
 		 * lock has expired. */
-		for (int i=0; i<unlockedList.size(); i++){
+		for (int i=0; i < unlockedList.size(); i++){
 			currentUnlocked = unlockedList.get(i);				
 			if (currentUnlocked.getKey().equals(doc.getKey())){
 				throw new LockExpired("Document is unlocked");
@@ -127,6 +127,7 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 		/* If notInList is true, then we have a new key and must add to the metadata list */
 		if (notInList){
 			DocumentMetadata newMetadata = new DocumentMetadata(doc.getKey(), doc.getTitle());
+			unlockedList.add(0, newItem);
 			metadataList.add(0, newMetadata);
 		}
 		return newItem;
