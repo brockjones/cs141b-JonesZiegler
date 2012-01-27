@@ -1,13 +1,9 @@
 package edu.caltech.cs141b.hw2.gwt.collab.server;
 
 import java.util.List;
-<<<<<<< HEAD
-import java.util.logging.Logger;
-=======
-// import java.util.logging.Logger; // Commented out since we don't use this
+import java.util.logging.Logger; 
 import java.util.Date;
 import java.util.LinkedList;
->>>>>>> 97e41334edd9afc3436078e32021095512bf6d44
 
 import edu.caltech.cs141b.hw2.gwt.collab.client.CollaboratorService;
 import edu.caltech.cs141b.hw2.gwt.collab.shared.DocumentMetadata;
@@ -24,42 +20,14 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 @SuppressWarnings("serial")
 public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 		CollaboratorService {
-	
-<<<<<<< HEAD
-	private static final Logger log = Logger.getLogger(CollaboratorServiceImpl.class.toString());
 
-	@Override
-	public List<DocumentMetadata> getDocumentList() {
-		return null;
-	}
-
-	@Override
-	public LockedDocument lockDocument(String documentKey)
-			throws LockUnavailable {
-		return null;
-	}
-
-	@Override
-	public UnlockedDocument getDocument(String documentKey) {
-		return null;
-	}
-
-	@Override
-	public UnlockedDocument saveDocument(LockedDocument doc)
-			throws LockExpired {
-		return null;
-	}
-	
-	@Override
-	public void releaseLock(LockedDocument doc) throws LockExpired {
-=======
-	//private static final Logger log = Logger.getLogger(CollaboratorServiceImpl.class.toString()); //Commented out because we don't use it
+	private static final Logger log = Logger.getLogger(CollaboratorServiceImpl.class.toString()); 
 	public List<DocumentMetadata> metadataList = new LinkedList<DocumentMetadata>(); // List of metadata
 	public List<LockedDocument> lockedList = new LinkedList<LockedDocument>(); // List of Locked Documents
 	public List<UnlockedDocument> unlockedList = new LinkedList<UnlockedDocument>(); // List of Unlocked Documents
 	public static int lockCount = 0; // Use this to identify locked items. It is incremented with each use so each ID is (within reason) unique.
 
-	
+
 	/* This function returns the list of metadata 
 	 * Arguments: None
 	 * Return: LinkedList<DocumentMetadata>*/
@@ -68,7 +36,7 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 		return metadataList;
 	}
 
-	
+
 	/* This function takes a key and locks a document if the document is available
 	 * Arguments: String (serves as a key) 
 	 * Returns: LockedDocument */
@@ -130,7 +98,7 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 		UnlockedDocument newItem = null; // Return variable
 		String lockId = doc.getLockedBy(); // lockedBy identifier
 		boolean notInList = true; // This remains true only if the key is new
-		
+
 		/* This loop searches the list of UnlockedDocuments for the key. If the key is found, then we know the
 		 * lock has expired. */
 		for (int i=0; i<unlockedList.size(); i++){
@@ -163,7 +131,7 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 		}
 		return newItem;
 	}
-	
+
 	/* This function takes a LockedDocument, checks that it is still locked with the same id
 	 * and if so, returns it to the list of UnlockedDocuments */
 	@Override
@@ -192,8 +160,6 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 			throw new LockExpired("Document not locked");
 		}
 		return;
->>>>>>> 97e41334edd9afc3436078e32021095512bf6d44
 	}
 
 }
-
