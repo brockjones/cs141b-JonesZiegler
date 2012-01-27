@@ -72,17 +72,17 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 	 * Returns: UnlockedDocument */
 	@Override
 	public UnlockedDocument getDocument(String documentKey) {
-		UnlockedDocument current; // Iterates through list
+		UnlockedDocument current = null; // Iterates through list
 		UnlockedDocument newItem = null; // Return variable
 		/* Iterates through unlocked list checking if keys match */
 		for (int i=0; i<unlockedList.size(); i++){
 			current = unlockedList.get(i);
 			if (current.getKey().equals(documentKey)){
-				newItem = new UnlockedDocument(current.getKey(), current.getTitle(), current.getContents());
+				//newItem = new UnlockedDocument(current.getKey(), current.getTitle(), current.getContents());
 				break;
 			}
 		}
-		return newItem;
+		return current;
 	}
 
 	/* This function takes a LockedDocument and if the key and lockedBy ID matches that of the document in 
