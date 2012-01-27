@@ -148,7 +148,7 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 				if (!currentLocked.getLockedBy().equals(lockId)){
 					throw new LockExpired("Invalid Lock ID");
 				}
-				newItem = new UnlockedDocument(currentLocked.getKey(), currentLocked.getTitle(), currentLocked.getLockedBy());
+				newItem = currentLocked.unlock();
 				lockedList.remove(i);
 				unlockedList.add(0, newItem);
 				notInList = false;
