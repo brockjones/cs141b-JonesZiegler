@@ -13,6 +13,8 @@ import edu.caltech.cs141b.hw2.gwt.collab.shared.LockedDocument;
 import edu.caltech.cs141b.hw2.gwt.collab.shared.UnlockedDocument;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 
 /**
  * The server side implementation of the RPC service.
@@ -22,9 +24,16 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 		CollaboratorService {
 
 	private static final Logger log = Logger.getLogger(CollaboratorServiceImpl.class.toString()); 
+	@Persistent
 	public List<DocumentMetadata> metadataList = new LinkedList<DocumentMetadata>(); // List of metadata
+	
+	@Persistent
 	public List<LockedDocument> lockedList = new LinkedList<LockedDocument>(); // List of Locked Documents
+	
+	@Persistent
 	public List<UnlockedDocument> unlockedList = new LinkedList<UnlockedDocument>(); // List of Unlocked Documents
+	
+	@Persistent 
 	public static int lockCount = 0; // Use this to identify locked items. It is incremented with each use so each ID is (within reason) unique.
 
 
@@ -40,7 +49,7 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 	/* This function takes a key and locks a document if the document is available
 	 * Arguments: String (serves as a key) 
 	 * Returns: LockedDocument */
-	@Override
+	@Override 
 	public LockedDocument lockDocument(String documentKey)
 			throws LockUnavailable {
 		UnlockedDocument current; // Used to iterate
